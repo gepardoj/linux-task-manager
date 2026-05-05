@@ -20,7 +20,7 @@ QVariant ProcessModelTable::headerData(int section, Qt::Orientation orientation,
         case 0: return "PID";
         case 1: return "Name";
         case 2: return "CPU %";
-        case 3: return "Mem %";
+        case 3: return "Mem, kb";
         default: return QVariant();
     }
 }
@@ -37,4 +37,15 @@ QVariant ProcessModelTable::data(const QModelIndex &index, int role) const {
         case 3: return QString::number(process.memUsage, 'f', 1);
         default: return QVariant();
     }
+}
+
+void ProcessModelTable::updateProcesses(const std::vector<ProcessInfo> &newProcesses) {
+    beginResetModel();
+
+    m_processes.clear();
+    for (auto& process : newProcesses) {
+        m_processes.push_back(process);
+    }
+
+    endResetModel();
 }

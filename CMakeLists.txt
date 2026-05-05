@@ -13,6 +13,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(my_app 
     src/main.cpp
+    src/filesystem/filesystem.cpp
     src/tables/ProcessModelTable.cpp
 )
 
