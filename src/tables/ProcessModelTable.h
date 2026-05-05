@@ -1,0 +1,29 @@
+#pragma once
+
+#include <vector>
+#include <string>
+#include <QAbstractTableModel>
+
+
+struct ProcessInfo {
+    int pid;
+    QString name;
+    double cpuUsage;
+    double memUsage;
+};
+
+class ProcessModelTable : public QAbstractTableModel {
+    Q_OBJECT
+public:
+    explicit ProcessModelTable(QObject *parent = nullptr);
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+
+    void updateProcesses(const std::vector<ProcessInfo> &newProcesses);
+
+private:
+    std::vector<ProcessInfo> m_processes;
+};
