@@ -3,10 +3,12 @@
 #include <algorithm>
 #include <vector>
 #include <string>
-#include "../tables/ProcessModelTable.h"
+#include "../gui/ProcessModelTable.h"
 
 namespace fs = std::filesystem;
 
+namespace ProcessReader 
+{
 std::vector<int> getRunningPids() {
     std::vector<int> pids;
     const std::string procPath = "/proc";
@@ -54,4 +56,5 @@ void readStat(int pid, ProcessInfo &process) {
             process.memUsage = value;
         }
     }
+}
 }

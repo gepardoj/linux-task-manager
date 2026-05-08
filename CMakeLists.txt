@@ -13,8 +13,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(my_app 
     src/main.cpp
-    src/filesystem/filesystem.cpp
-    src/tables/ProcessModelTable.cpp
+    src/core/ProcessReader.cpp
+    src/gui/ProcessModelTable.cpp
 )
 
 target_include_directories(my_app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <QtWidgets>
 #include <QPushButton>
-#include "tables/ProcessModelTable.h"
-#include "filesystem/filesystem.h"
+#include "gui/ProcessModelTable.h"
+#include "core/ProcessReader.h"
 
 
 int main(int argc, char **argv) {
@@ -20,12 +20,12 @@ int main(int argc, char **argv) {
   proxyModel->setSourceModel(model);
 
   
-  auto pids = getRunningPids();
+  auto pids = ProcessReader::getRunningPids();
 
   std::vector<ProcessInfo> processes;
   for (auto pid : pids) {
     ProcessInfo process = {};
-    readStat(pid, process);
+     ProcessReader::readStat(pid, process);
     processes.push_back(process);
   }
 
