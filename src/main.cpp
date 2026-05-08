@@ -4,10 +4,10 @@
 #include "gui/ProcessModelTable.h"
 #include "core/ProcessReader.h"
 
-
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   QApplication app(argc, argv);
-  
+
   // QPushButton button("Hello world!");
   // button.resize(200,100);
   // button.show();
@@ -19,18 +19,7 @@ int main(int argc, char **argv) {
   auto *proxyModel = new QSortFilterProxyModel;
   proxyModel->setSourceModel(model);
 
-  
-  auto pids = ProcessReader::getRunningPids();
-
-  std::vector<ProcessInfo> processes;
-  for (auto pid : pids) {
-    ProcessInfo process = {};
-     ProcessReader::readStat(pid, process);
-    processes.push_back(process);
-  }
-
-
-  model->updateProcesses(processes);
+  // model->updateProcesses(processes);
 
   view->setWindowTitle("Linux Task Manager");
   view->resize(800, 600);
@@ -47,4 +36,3 @@ int main(int argc, char **argv) {
 
   return app.exec();
 }
-

@@ -3,16 +3,18 @@
 #include <vector>
 #include <string>
 #include <QAbstractTableModel>
+#include <QTimer>
 
-
-struct ProcessInfo {
+struct ProcessInfo
+{
     int pid;
     QString name;
     double cpuUsage;
     int memUsage;
 };
 
-class ProcessModelTable : public QAbstractTableModel {
+class ProcessModelTable : public QAbstractTableModel
+{
     Q_OBJECT
 public:
     explicit ProcessModelTable(QObject *parent = nullptr);
@@ -24,6 +26,11 @@ public:
 
     void updateProcesses(const std::vector<ProcessInfo> &newProcesses);
 
+    void refresh();
+
 private:
     std::vector<ProcessInfo> m_processes;
+    QTimer *m_refreshTimer = nullptr;
+
+    void loadAllProcesses();
 };

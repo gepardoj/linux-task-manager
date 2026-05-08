@@ -7,54 +7,78 @@
 
 namespace fs = std::filesystem;
 
-namespace ProcessReader 
+namespace ProcessReader
 {
-std::vector<int> getRunningPids() {
-    std::vector<int> pids;
-    const std::string procPath = "/proc";
+    std::vector<int> getRunningPids()
+    {
+        std::vector<int> pids;
+        const std::string procPath = "/proc";
 
-    try {
-        for (const auto& entry : fs::directory_iterator(procPath)) {
-            if (entry.is_directory()) {
-                std::string folderName = entry.path().filename().string();
+        try
+        {
+            for (const auto &entry : fs::directory_iterator(procPath))
+            {
+                if (entry.is_directory())
+                {
+                    std::string folderName = entry.path().filename().string();
 
-                // folder is digitial (it's a process)
-                if (std::all_of(folderName.begin(), folderName.end(), ::isdigit)) {
-                    pids.push_back(std::stoi(folderName));
-
+                    // folder is digitial (it's a process)
+                    if (std::all_of(folderName.begin(), folderName.end(), ::isdigit))
+                    {
+                        pids.push_back(std::stoi(folderName));
+                    }
                 }
             }
         }
-    } catch (const fs::filesystem_error& e) {
-        //
+        catch (const fs::filesystem_error &e)
+        {
+            //
+        }
+
+        return pids;
     }
 
-    return pids;
-}
+    void readStat(int pid, ProcessInfo &process)
+    {
+        std::string path = "/proc/" + std::to_string(pid) + "/status";
+        std::ifstream file(path);
+        if (!file.is_open())
+            return;
 
-void readStat(int pid, ProcessInfo &process) {
-    std::string path = "/proc/" + std::to_string(pid) + "/status";
-    std::ifstream file(path);
-    if (!file.is_open()) return;
+        process.pid = pid;
 
-    process.pid = pid;
+        std::string line;
 
-    std::string line;
-    
-    while (std::getline(file, line)) {
-        std::stringstream ss(line);
-        if (line.substr(0, 5) == "Name:") {
-            process.name = QString::fromStdString(line.substr(6)).trimmed();
-        }
-        else if (line.substr(0, 6) == "VmRSS:") {
-            std::string label;
-            int value;
-            std::string unit;
+        while (std::getline(file, line))
+        {
+            std::stringstream ss(line);
+            if (line.substr(0, 5) == "Name:")
+            {
+                process.name = QString::fromStdString(line.substr(6)).trimmed();
+            }
+            else if (line.substr(0, 6) == "VmRSS:")
+            {
+                std::string label;
+                int value;
+                std::string unit;
 
-            ss >> label >> value >> unit;
+                ss >> label >> value >> unit;
 
-            process.memUsage = value;
+                process.memUsage = value;
+            }
         }
     }
-}
+    std::vector<ProcessInfo> getAllProcesses()
+    {
+        auto pids = getRunningPids();
+
+        std::vector<ProcessInfo> processes;
+        for (auto pid : pids)
+        {
+            ProcessInfo process = {};
+            readStat(pid, process);
+            processes.push_back(process);
+        }
+        return processes;
+    }
 }
