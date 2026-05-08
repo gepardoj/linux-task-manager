@@ -3,7 +3,7 @@
 #include <vector>
 #include "../gui/ProcessModelTable.h"
 
-namespace ProcessReader
+namespace SystemMonitor
 {
     std::vector<ProcessInfo> getAllProcesses();
     std::vector<int> getRunningPids();

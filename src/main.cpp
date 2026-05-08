@@ -2,24 +2,16 @@
 #include <QtWidgets>
 #include <QPushButton>
 #include "gui/ProcessModelTable.h"
-#include "core/ProcessReader.h"
 
 int main(int argc, char **argv)
 {
   QApplication app(argc, argv);
-
-  // QPushButton button("Hello world!");
-  // button.resize(200,100);
-  // button.show();
-
   qDebug() << "qt ver:" << qVersion();
 
   QTableView *view = new QTableView;
   ProcessModelTable *model = new ProcessModelTable;
   auto *proxyModel = new QSortFilterProxyModel;
   proxyModel->setSourceModel(model);
-
-  // model->updateProcesses(processes);
 
   view->setWindowTitle("Linux Task Manager");
   view->resize(800, 600);

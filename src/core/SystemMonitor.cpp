@@ -7,7 +7,7 @@
 
 namespace fs = std::filesystem;
 
-namespace ProcessReader
+namespace SystemMonitor
 {
     std::vector<int> getRunningPids()
     {

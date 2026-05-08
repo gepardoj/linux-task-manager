@@ -1,5 +1,5 @@
 #include "ProcessModelTable.h"
-#include "../core/ProcessReader.h"
+#include "../core/SystemMonitor.h"
 
 ProcessModelTable::ProcessModelTable(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -19,7 +19,7 @@ void ProcessModelTable::refresh()
 void ProcessModelTable::loadAllProcesses()
 {
     m_processes.clear();
-    auto newProcesses = ProcessReader::getAllProcesses();
+    auto newProcesses = SystemMonitor::getAllProcesses();
     m_processes = std::move(newProcesses);
 }
 
