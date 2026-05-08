@@ -14,6 +14,7 @@ set(CMAKE_BUILD_TYPE Debug)
 add_executable(my_app 
     src/main.cpp
     src/core/SystemMonitor.cpp
+    src/gui/MainWindow.cpp
     src/gui/ProcessModelTable.cpp
 )
 
