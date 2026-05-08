@@ -9,7 +9,7 @@ struct ProcessInfo {
     int pid;
     QString name;
     double cpuUsage;
-    double memUsage;
+    int memUsage;
 };
 
 class ProcessModelTable : public QAbstractTableModel {

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(project)
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -18,4 +18,4 @@ add_executable(my_app
 )
 
 target_include_directories(my_app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_link_libraries(my_app Qt5::Widgets)
+target_link_libraries(my_app Qt6::Widgets)

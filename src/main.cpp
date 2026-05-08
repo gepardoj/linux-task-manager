@@ -12,8 +12,12 @@ int main(int argc, char **argv) {
   // button.resize(200,100);
   // button.show();
 
+  qDebug() << "qt ver:" << qVersion();
+
   QTableView *view = new QTableView;
   ProcessModelTable *model = new ProcessModelTable;
+  auto *proxyModel = new QSortFilterProxyModel;
+  proxyModel->setSourceModel(model);
 
   
   auto pids = getRunningPids();
@@ -30,7 +34,8 @@ int main(int argc, char **argv) {
 
   view->setWindowTitle("Linux Task Manager");
   view->resize(800, 600);
-  view->setModel(model);
+  view->setModel(proxyModel);
+  view->setSortingEnabled(true);
   view->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed);
   view->setColumnWidth(0, 60);
   view->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);

@@ -34,7 +34,7 @@ QVariant ProcessModelTable::data(const QModelIndex &index, int role) const {
         case 0: return process.pid;
         case 1: return process.name;
         case 2: return QString::number(process.cpuUsage, 'f', 1);
-        case 3: return QString::number(process.memUsage, 'f', 1);
+        case 3: return process.memUsage;//::number(process.memUsage, 'f', 1);
         default: return QVariant();
     }
 }

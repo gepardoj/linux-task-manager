@@ -46,7 +46,7 @@ void readStat(int pid, ProcessInfo &process) {
         }
         else if (line.substr(0, 6) == "VmRSS:") {
             std::string label;
-            long value;
+            int value;
             std::string unit;
 
             ss >> label >> value >> unit;
