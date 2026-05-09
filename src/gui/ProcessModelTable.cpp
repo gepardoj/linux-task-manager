@@ -20,6 +20,8 @@ void ProcessModelTable::loadAllProcesses()
 {
     m_processes.clear();
     auto newProcesses = SystemMonitor::getAllProcesses();
+    auto total = newProcesses.size();
+    emit summaryUpdated(total);
     m_processes = std::move(newProcesses);
 }
 

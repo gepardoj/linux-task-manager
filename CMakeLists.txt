@@ -16,6 +16,7 @@ add_executable(my_app
     src/core/SystemMonitor.cpp
     src/gui/MainWindow.cpp
     src/gui/ProcessModelTable.cpp
+    src/gui/ProcessSummaryPanel.cpp
 )
 
 target_include_directories(my_app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

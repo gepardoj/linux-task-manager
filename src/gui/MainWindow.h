@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ProcessModelTable.h"
+#include "ProcessSummaryPanel.h"
 #include <QMainWindow>
 #include <QtWidgets>
 
@@ -14,4 +15,5 @@ public:
 
 private:
     ProcessModelTable *m_model = nullptr;
+    ProcessSummaryPanel *m_summaryPanel = nullptr;
 };

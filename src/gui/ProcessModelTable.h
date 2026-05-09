@@ -28,6 +28,9 @@ public:
 
     void refresh();
 
+signals:
+    void summaryUpdated(size_t total);
+
 private:
     std::vector<ProcessInfo> m_processes;
     QTimer *m_refreshTimer = nullptr;
