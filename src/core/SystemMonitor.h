@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../gui/ProcessModelTable.h"
+#include "Process.h"
 
 namespace SystemMonitor
 {

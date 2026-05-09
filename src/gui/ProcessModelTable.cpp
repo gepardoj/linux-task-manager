@@ -81,7 +81,7 @@ QVariant ProcessModelTable::data(const QModelIndex &index, int role) const
     case 0:
         return process.pid;
     case 1:
-        return process.name;
+        return QString::fromStdString(process.name);
     case 2:
         return QString::number(process.cpuUsage, 'f', 1);
     case 3:

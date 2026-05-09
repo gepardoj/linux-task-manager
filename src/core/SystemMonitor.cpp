@@ -1,11 +1,9 @@
+#include "SystemMonitor.h"
 #include <filesystem>
 #include <fstream>
 #include <algorithm>
-#include <vector>
 #include <string>
-#include "../gui/ProcessModelTable.h"
 #include "../utils/StringUtils.h"
-#include "SystemMonitor.h"
 
 namespace fs = std::filesystem;
 
@@ -97,7 +95,7 @@ void SystemMonitor::readStat(int pid, ProcessInfo &process)
         std::stringstream ss(line);
         if (line.substr(0, 5) == "Name:")
         {
-            process.name = QString::fromStdString(line.substr(6)).trimmed();
+            process.name = line.substr(6);
         }
         else if (line.substr(0, 6) == "VmRSS:")
         {
@@ -121,7 +119,7 @@ std::vector<ProcessInfo> SystemMonitor::getAllProcesses()
     {
         ProcessInfo process = {};
         readStat(pid, process);
-        process.iconName = getIconNameByProcess(process.name.toStdString());
+        process.iconName = getIconNameByProcess(process.name);
         processes.push_back(process);
     }
     return processes;

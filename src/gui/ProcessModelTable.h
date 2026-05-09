@@ -4,15 +4,7 @@
 #include <string>
 #include <QAbstractTableModel>
 #include <QTimer>
-
-struct ProcessInfo
-{
-    int pid;
-    QString name;
-    double cpuUsage;
-    int memUsage;
-    std::string iconName;
-};
+#include "../core/Process.h"
 
 class ProcessModelTable : public QAbstractTableModel
 {
