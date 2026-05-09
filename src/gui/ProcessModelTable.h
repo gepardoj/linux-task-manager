@@ -11,6 +11,7 @@ struct ProcessInfo
     QString name;
     double cpuUsage;
     int memUsage;
+    std::string iconName;
 };
 
 class ProcessModelTable : public QAbstractTableModel
@@ -33,6 +34,7 @@ signals:
 
 private:
     std::vector<ProcessInfo> m_processes;
+    // std::map<std::string, QIcon> m_map_icons;
     QTimer *m_refreshTimer = nullptr;
 
     void loadAllProcesses();

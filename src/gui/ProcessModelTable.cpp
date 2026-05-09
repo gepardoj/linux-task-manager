@@ -1,5 +1,6 @@
 #include "ProcessModelTable.h"
 #include "../core/SystemMonitor.h"
+#include <QIcon>
 
 ProcessModelTable::ProcessModelTable(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -60,10 +61,20 @@ QVariant ProcessModelTable::headerData(int section, Qt::Orientation orientation,
 
 QVariant ProcessModelTable::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || role != Qt::DisplayRole)
+    if (!index.isValid())
         return QVariant();
 
     const auto &process = m_processes[index.row()];
+
+    if (role == Qt::DecorationRole && index.column() == 1)
+    {
+        auto icon = QIcon::fromTheme(QString::fromStdString(process.iconName));
+        return icon;
+    }
+    else if (role != Qt::DisplayRole)
+    {
+        return QVariant();
+    }
 
     switch (index.column())
     {

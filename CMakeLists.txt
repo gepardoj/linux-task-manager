@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.21)
 project(project)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Gui)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -13,6 +13,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(my_app 
     src/main.cpp
+    src/utils/StringUtils.cpp
     src/core/SystemMonitor.cpp
     src/gui/MainWindow.cpp
     src/gui/ProcessModelTable.cpp
@@ -20,4 +21,8 @@ add_executable(my_app
 )
 
 target_include_directories(my_app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
-target_link_libraries(my_app Qt6::Widgets)
+target_link_libraries(my_app 
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+)
